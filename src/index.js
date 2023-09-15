@@ -15,14 +15,14 @@ db.connect();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '\\public')));
+app.use(express.static(path.join(__dirname, 'public')));
 //HTTP Request
 // app.use(morgan('combined'));
 
 //Handlebar
 app.engine('handlebars', handlebars.engine());
 app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname, 'resource\\views'));
+app.set('views', path.join(__dirname, 'resource', 'views'));
 
 route(app);
 
