@@ -3,23 +3,32 @@ const { mongooseToObject, multipleMongooseToObject } = require('../../util/mongo
 
 class CourseConTroller {
 
-    // [GET] /news
+    // [GET] /:slug
     async show(req, res) {
         try {
             const coursesJson = await cousrseModel.findOne({ slugurl: req.params.slug });
             res.render('courses/show', { coursesJson: mongooseToObject(coursesJson) });
-            // res.render('courses/show');
-            // res.json(coursesJson);
-
         } catch (error) {
             console.log('ERROR!!!!')
         }
     }
 
-    // // [GET] /:slug
-    // show(req, res) {
-    //     res.send('show page');
-    // }
+    async create(req, res) {
+        res.render('courses/create');
+    }
+
+    async store(req, res) {
+        try {
+            const formData = req.body;
+            console.log(req.body.videoId);
+            formData.image = `https://i.ytimg.com/vi/${req.body.videoId}/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBof7ldUB9r0KAuv1t8pBjvODyBbg`;
+            const instance = new cousrseModel(formData);
+            await instance.save();
+            res.redirect('/')
+        } catch (error) {
+            console.log('ERROR!!!!')
+        }
+    }
 
 }
 
