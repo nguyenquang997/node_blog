@@ -1,10 +1,36 @@
 const cousrseModel = require('../models/Courses')
+const usersInfo = require('../models/UserInfos')
 
 const { multipleMongooseToObject } = require('../../util/mongoose');
 
 class SiteConTroller {
 
     // [GET] /
+    async login(req, res) {
+        res.render('login');
+    }
+
+    // [POST] /stored
+    async actionLogin(req, res) {
+        try {
+            console.log(req.body);
+            const isLogin = await usersInfo.findOne({ userId: req.body.userId, passWord: req.body.passWord });
+            console.log(isLogin);
+
+            if (isLogin) {
+                res.redirect('home');
+            } else {
+                res.redirect('back');
+            }
+
+        } catch (error) {
+            console.log('ERROR!!!!')
+        }
+        // res.render('home');
+    }
+
+
+    // [GET] /home
     async home(req, res) {
         try {
             const coursesJson = await cousrseModel.find({});
@@ -15,23 +41,6 @@ class SiteConTroller {
             console.log('ERROR!!!!')
         }
         // res.render('home');
-    }
-
-    // [GET] /search
-    async search(req, res) {
-        // try {
-        //     const instance = new cousrseModel();
-        //     instance.code = '2'
-        //     instance.name = 'Khoa hoc 2'
-        //     instance.info = 'Khoa hoc 2'
-        //     instance.image = 'dasdad'
-
-        //     await instance.save();
-        //     console.log('Insert Success')
-        // } catch (error) {
-        //     console.log('ERROR!!!!')
-        // }
-        res.render('search');
     }
 
 }

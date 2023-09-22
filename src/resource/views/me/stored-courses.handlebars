@@ -1,0 +1,77 @@
+<div>
+    <h2>Khóa học của tôi</h2>
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Tên khóa học</th>
+                <th>Mô tả</th>
+                <th colspan="2">Thời gian cập nhật</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each coursesJson}}
+            <tr>
+                <th scope="row">1</th>
+                <td>{{this.name}}</td>
+                <td>{{this.info}}</td>
+                <td>{{this.updatedAt}}</td>
+                <td>
+                    <a href="/courses/{{this._id}}/edit" class="btn btn-sm btn-primary">Sửa</a>
+                    <a href="" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete-dialog"
+                        data-id="{{this._id}}">Xóa</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</div>
+
+
+<form id="formDelete" method="POST">
+</form>
+
+
+<!-- Modal -->
+<div class="modal fade" id="delete-dialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Xác nhận xóa khóa học</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xóa khó học?
+            </div>
+            <div class="modal-footer">
+                <button id="btnDelete" type="button" class="btn btn-secondary btn-danger">Xóa bỏ</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    //When show confirm delete
+    const exampleModal = document.getElementById('delete-dialog');
+    if (exampleModal) {
+        exampleModal.addEventListener('show.bs.modal', event => {
+
+            const btnDelete = document.getElementById('btnDelete');
+            const formDelete = document.forms['formDelete'];
+
+            // Button that triggered the modal
+            const button = event.relatedTarget;
+            // Extract info from data-bs-* attributes
+            const recipient = button.getAttribute('data-id');
+
+            btnDelete.onclick = () => {
+                formDelete.action = `/courses/${recipient}?_method=DELETE`;
+                formDelete.submit();
+            }
+        })
+    }
+
+</script>

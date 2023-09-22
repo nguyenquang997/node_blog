@@ -4,7 +4,8 @@ const routes = express.Router();
 
 const siteController = require('../app/controllers/SiteController')
 
-routes.get('/search', siteController.search);
-routes.get('/', siteController.home); 
+routes.get('/home', siteController.home);
+routes.post('/stored', siteController.actionLogin);
+routes.get('/', siteController.login);
 
 module.exports = routes;
