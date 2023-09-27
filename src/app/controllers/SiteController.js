@@ -1,7 +1,7 @@
 const cousrseModel = require('../models/Courses')
 const usersInfo = require('../models/UserInfos')
 
-const { multipleMongooseToObject } = require('../../util/mongoose');
+const { multipleMongooseToObject , mongooseToObject} = require('../../util/mongoose');
 
 class SiteConTroller {
 
@@ -13,9 +13,7 @@ class SiteConTroller {
     // [POST] /stored
     async actionLogin(req, res) {
         try {
-            console.log(req.body);
             const isLogin = await usersInfo.findOne({ userId: req.body.userId, passWord: req.body.passWord });
-            console.log(isLogin);
 
             if (isLogin) {
                 res.redirect('home');

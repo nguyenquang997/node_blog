@@ -25,7 +25,7 @@ class CourseConTroller {
             formData.image = `https://i.ytimg.com/vi/${req.body.videoId}/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBof7ldUB9r0KAuv1t8pBjvODyBbg`;
             const instance = new cousrseModel(formData);
             await instance.save();
-            res.redirect('/')
+            res.redirect('/home')
         } catch (error) {
             console.log('ERROR!!!!')
         }
