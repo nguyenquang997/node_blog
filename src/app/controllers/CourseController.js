@@ -25,7 +25,7 @@ class CourseConTroller {
             formData.image = `https://i.ytimg.com/vi/${req.body.videoId}/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBof7ldUB9r0KAuv1t8pBjvODyBbg`;
             const instance = new cousrseModel(formData);
             await instance.save();
-            res.redirect('/home')
+            res.redirect('/me/stored/courses')
         } catch (error) {
             console.log('ERROR!!!!')
         }
@@ -56,7 +56,7 @@ class CourseConTroller {
     // [DELETE] /:id
     async destroy(req, res) {
         try {
-            await cousrseModel.deleteOne({ _id: req.params.id });
+            await cousrseModel.delete({ _id: req.params.id });
             res.redirect('back');
         } catch (error) {
             console.log('ERROR!!!!')

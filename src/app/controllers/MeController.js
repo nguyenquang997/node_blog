@@ -14,22 +14,16 @@ class MeConTroller {
 
     }
 
-    // async create(req, res) {
-    //     res.render('courses/create');
-    // }
+    // [GET] /me/trash/courses
+    async trashCourses(req, res) {
+        try {
+            const coursesJson = await cousrseModel.findDeleted();
+            res.render('me/trash-courses', { coursesJson: multipleMongooseToObject(coursesJson) });
+        } catch (error) {
+            console.log('ERROR!!!!')
+        }
 
-    // async store(req, res) {
-    //     try {
-    //         const formData = req.body;
-    //         console.log(req.body.videoId);
-    //         formData.image = `https://i.ytimg.com/vi/${req.body.videoId}/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBof7ldUB9r0KAuv1t8pBjvODyBbg`;
-    //         const instance = new cousrseModel(formData);
-    //         await instance.save();
-    //         res.redirect('/')
-    //     } catch (error) {
-    //         console.log('ERROR!!!!')
-    //     }
-    // }
+    }
 
 }
 
