@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "src\\index.js",
     "watch": "node-sass --watch src\\resource\\scss -o src\\public\\css",
-    "startup": "nodemon --inspect src\\index.js",
+    "startup": "nodemon --inspect src\\index.js"
   },
   "repository": {
     "type": "git",
